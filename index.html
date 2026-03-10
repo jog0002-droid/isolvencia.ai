@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insolvencia.ai — IA especializada en Derecho Concursal</title>
+<meta name="description" content="La primera IA especializada exclusivamente en concurso de acreedores, segunda oportunidad y reestructuración de deuda para abogados concursalistas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:      #0D0D12;
+  --ink2:     #1A1A2E;
+  --ivory:    #F8F6F1;
+  --cream:    #F1EDE4;
+  --gold:     #B8962E;
+  --gold-l:   #D4AF5A;
+  --gold-d:   #8C7022;
+  --rust:     #8B3A2A;
+  --slate:    #3D4A5C;
+  --muted:    #6B7385;
+  --border:   rgba(184,150,46,0.18);
+  --border2:  rgba(13,13,18,0.08);
+  --white:    #FFFFFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ivory);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 0 5%;
+  height: 68px;
+  display: flex; align-items:center; justify-content:space-between;
+  background: rgba(248,246,241,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: all .3s ease;
+}
+nav.scrolled {
+  background: rgba(248,246,241,0.97);
+  box-shadow: 0 2px 20px rgba(13,13,18,0.08);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--slate);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { display: flex; gap: .75rem; align-items: center; }
+.btn-ghost {
+  padding: .5rem 1.1rem;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-ghost:hover { background: var(--cream); border-color: var(--border); }
+.btn-primary {
+  padding: .5rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--ivory);
+  background: var(--ink);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary:hover { background: var(--ink2); transform: translateY(-1px); }
+
+.hamburger { display: none; flex-direction: column; gap:5px; cursor:pointer; padding:4px; }
+.hamburger span { display:block; width:22px; height:2px; background:var(--ink); transition:.3s; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 120px 5% 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(184,150,46,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(139,58,42,0.06) 0%, transparent 50%);
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .35rem 1rem;
+  background: rgba(184,150,46,0.1);
+  border: 1px solid rgba(184,150,46,0.25);
+  border-radius: 100px;
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--gold-d);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.hero-badge::before {
+  content:'';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.4)}
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 900px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+h1 em {
+  font-style: italic;
+  color: var(--gold-d);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 580px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center;
+  flex-wrap: wrap; justify-content: center;
+  position: relative;
+}
+.btn-hero {
+  padding: .85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ivory);
+  background: var(--ink);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .25s;
+  letter-spacing: .01em;
+}
+.btn-hero:hover { background: var(--ink2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,13,18,0.2); }
+.btn-hero-ghost {
+  padding: .85rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: 1.5px solid rgba(13,13,18,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .25s;
+}
+.btn-hero-ghost:hover { border-color: var(--gold); color: var(--gold-d); }
+.hero-note {
+  margin-top: 1.5rem;
+  font-size: .8rem;
+  color: var(--muted);
+  position: relative;
+}
+
+/* ── MARQUEE ── */
+.marquee-section {
+  padding: 2rem 0;
+  background: var(--cream);
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 3rem;
+  animation: marquee 22s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.marquee-dot { width:4px; height:4px; background: var(--gold); border-radius:50%; flex-shrink:0; }
+@keyframes marquee {
+  from{transform:translateX(0)} to{transform:translateX(-50%)}
+}
+
+/* ── SECTIONS ── */
+section { position: relative; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 5%; }
+.section-label {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-d);
+  margin-bottom: 1rem;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+h2 em { font-style: italic; color: var(--gold-d); }
+.section-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+/* ── DIFERENCIADORES ── */
+.diff-section { padding: 100px 0; }
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 4rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+}
+.diff-col { background: var(--white); }
+.diff-col.dark { background: var(--ink); }
+.diff-header {
+  padding: 1.5rem 2rem;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border2);
+}
+.diff-col.dark .diff-header {
+  color: var(--muted);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.diff-col:not(.dark) .diff-header { color: var(--muted); }
+.diff-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border2);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.diff-col.dark .diff-item {
+  color: rgba(255,255,255,0.75);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+.diff-icon { font-size: 1rem; flex-shrink:0; margin-top:.1rem; }
+
+/* ── PROCESS ── */
+.process-section { padding: 100px 0; background: var(--cream); }
+.process-header { margin-bottom: 5rem; }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.step {
+  position: relative;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  transition: transform .3s, box-shadow .3s;
+}
+.step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,13,18,0.1); }
+.step-num {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+.step h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .75rem;
+  letter-spacing: -0.01em;
+}
+.step p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
+
+/* ── FEATURES ── */
+.features-section { padding: 100px 0; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.feature-card {
+  padding: 2rem 2.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  background: var(--white);
+  transition: all .3s;
+}
+.feature-card:hover { border-color: rgba(184,150,46,0.3); box-shadow: 0 4px 24px rgba(184,150,46,0.08); }
+.feature-card.accent { background: var(--ink); border-color: transparent; }
+.feature-icon {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+.feature-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.feature-card.accent h3 { color: var(--ivory); }
+.feature-card p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+.feature-card.accent p { color: rgba(255,255,255,0.55); }
+.feature-tags {
+  display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem;
+}
+.tag {
+  padding: .25rem .7rem;
+  font-size: .75rem;
+  font-weight: 500;
+  border-radius: 100px;
+  background: var(--cream);
+  color: var(--slate);
+}
+.feature-card.accent .tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+/* ── CASOS DE USO ── */
+.use-cases { padding: 100px 0; background: var(--cream); }
+.use-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.use-card {
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+}
+.use-card-icon {
+  width: 48px; height: 48px;
+  background: var(--cream);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+}
+.use-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .5rem;
+}
+.use-card p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+
+/* ── PRICING ── */
+.pricing-section { padding: 100px 0; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+.plan {
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background: var(--white);
+  padding: 2rem 2rem 2.5rem;
+  position: relative;
+}
+.plan.featured {
+  background: var(--ink);
+  border-color: var(--gold);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(13,13,18,0.25);
+}
+.plan-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: .3rem .9rem;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.plan-name {
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .75rem;
+}
+.plan.featured .plan-name { color: rgba(255,255,255,0.5); }
+.plan-price {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: .25rem;
+}
+.plan.featured .plan-price { color: var(--ivory); }
+.plan-price sup { font-size: 1.4rem; font-weight: 400; vertical-align: top; margin-top: .5rem; }
+.plan-price sub { font-family: var(--font-body); font-size: .9rem; font-weight: 400; color: var(--muted); }
+.plan.featured .plan-price sub { color: rgba(255,255,255,0.5); }
+.plan-desc { font-size: .875rem; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.5; }
+.plan.featured .plan-desc { color: rgba(255,255,255,0.55); }
+.plan-divider {
+  height: 1px;
+  background: var(--border2);
+  margin-bottom: 1.5rem;
+}
+.plan.featured .plan-divider { background: rgba(255,255,255,0.1); }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; }
+.plan-features li {
+  display: flex; align-items: flex-start; gap: .6rem;
+  font-size: .875rem;
+  color: var(--slate);
+  line-height: 1.4;
+}
+.plan.featured .plan-features li { color: rgba(255,255,255,0.75); }
+.plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink:0; }
+.plan-btn {
+  display: block;
+  width: 100%;
+  padding: .8rem;
+  text-align: center;
+  border-radius: 7px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+}
+.plan-btn.outline {
+  border: 1.5px solid var(--border2);
+  color: var(--ink);
+  background: none;
+}
+.plan-btn.outline:hover { border-color: var(--ink); background: var(--cream); }
+.plan-btn.solid {
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+}
+.plan-btn.solid:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+/* ── SEGURIDAD ── */
+.security-section { padding: 100px 0; background: var(--cream); }
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.sec-item {
+  display: flex; gap: 1.25rem;
+  padding: 1.75rem;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+}
+.sec-icon { font-size: 1.5rem; flex-shrink:0; }
+.sec-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: .35rem;
+  color: var(--ink);
+}
+.sec-item p { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+
+/* ── FAQ ── */
+.faq-section { padding: 100px 0; }
+.faq-list { max-width: 720px; margin: 3rem auto 0; }
+.faq-item {
+  border-bottom: 1px solid var(--border2);
+}
+.faq-q {
+  width: 100%;
+  padding: 1.25rem 0;
+  display: flex; justify-content:space-between; align-items:center;
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  gap: 1rem;
+}
+.faq-q:hover { color: var(--gold-d); }
+.faq-icon { font-size: 1.2rem; color: var(--gold); flex-shrink:0; transition: transform .3s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  display: none;
+  padding-bottom: 1.25rem;
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── CTA ── */
+.cta-section { padding: 100px 0; }
+.cta-box {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-box::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(184,150,46,0.2) 0%, transparent 70%);
+}
+.cta-box h2 { color: var(--ivory); margin-bottom: 1rem; position:relative; }
+.cta-box p { color: rgba(255,255,255,0.55); max-width:480px; margin: 0 auto 2.5rem; position:relative; }
+.cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; position:relative; }
+.btn-cta-gold {
+  padding: .85rem 2rem;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .25s;
+}
+.btn-cta-gold:hover { background: var(--gold-l); transform: translateY(-2px); }
+.btn-cta-ghost {
+  padding: .85rem 2rem;
+  color: rgba(255,255,255,0.75);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .25s;
+}
+.btn-cta-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  padding: 60px 5% 30px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+.footer-brand .nav-logo { color: var(--ivory); }
+.footer-brand p {
+  margin-top: 1rem;
+  font-size: .85rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.4);
+  max-width: 280px;
+}
+.footer-col h5 {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1.25rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.footer-col a {
+  font-size: .875rem;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-col a:hover { color: var(--gold-l); }
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .8rem;
+  color: rgba(255,255,255,0.3);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-flags { display: flex; gap: .5rem; align-items: center; font-size: .8rem; }
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .steps { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .use-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .plan.featured { transform: none; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .security-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cta-box { padding: 3rem 1.75rem; }
+}
+@media(max-width:640px) {
+  .nav-links { display:none; }
+  .use-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hamburger { display: flex; }
+  nav.mobile-open .nav-links {
+    display: flex; flex-direction: column; gap: 1rem;
+    position: absolute; top: 68px; left:0; right:0;
+    background: var(--ivory);
+    padding: 1.5rem 5%;
+    border-bottom: 1px solid var(--border2);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">insolvencia<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#seguridad">Seguridad</a></li>
+    <li><a href="#faq">FAQs</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="btn-ghost" href="#precios">Iniciar sesión</a>
+    <a class="btn-primary" href="#precios">Accede gratis</a>
+  </div>
+  <div class="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">IA especializada · Derecho Concursal</div>
+  <h1>El criterio de un<br><em>concursalista experto,</em><br>amplificado por IA</h1>
+  <p class="hero-sub">La primera IA especializada exclusivamente en concurso de acreedores, segunda oportunidad y reestructuración. Para abogados que exigen precisión, no generalidades.</p>
+  <div class="hero-actions">
+    <a class="btn-hero" href="#precios">Empieza gratis — sin tarjeta</a>
+    <a class="btn-hero-ghost" href="#como-funciona">Ver cómo funciona</a>
+  </div>
+  <p class="hero-note">Sin almacenar tus documentos · Infraestructura europea · RGPD</p>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Ley Concursal (LC)</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Segunda Oportunidad</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>AEP y PAAC</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Plan de Reestructuración</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Administración Concursal</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Texto Refundido TRLC</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Créditos Concursales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Fase de Liquidación</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Convenio de Acreedores</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Incidente Concursal</span>
+    <!-- duplicate for loop -->
+    <span class="marquee-item"><span class="marquee-dot"></span>Ley Concursal (LC)</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Segunda Oportunidad</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>AEP y PAAC</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Plan de Reestructuración</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Administración Concursal</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Texto Refundido TRLC</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Créditos Concursales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Fase de Liquidación</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Convenio de Acreedores</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Incidente Concursal</span>
+  </div>
+</div>
+
+<!-- DIFERENCIADORES -->
+<section class="diff-section" id="como-funciona">
+  <div class="container">
+    <span class="section-label reveal">Por qué insolvencia.ai</span>
+    <h2 class="reveal">Las IAs generalistas no saben<br><em>leer un concurso.</em></h2>
+    <p class="section-sub reveal">Un copiloto legal genérico puede redactar. Insolvencia.ai analiza el caso concreto, contrasta con el TRLC y la jurisprudencia concursal, y detecta lo que puede fallar antes de que lo haga un juez.</p>
+
+    <div class="diff-grid reveal">
+      <div class="diff-col">
+        <div class="diff-header">IAs jurídicas generalistas</div>
+        <div class="diff-item"><span class="diff-icon">✗</span>Conocimiento general de derecho, sin profundidad concursal</div>
+        <div class="diff-item"><span class="diff-icon">✗</span>No distinguen entre créditos ordinarios, privilegiados y subordinados</div>
+        <div class="diff-item"><span class="diff-icon">✗</span>Desconocen los plazos y trámites del TRLC</div>
+        <div class="diff-item"><span class="diff-icon">✗</span>No anticipan objeciones de la administración concursal</div>
+        <div class="diff-item"><span class="diff-icon">✗</span>Respuestas genéricas para cualquier jurisdicción</div>
+      </div>
+      <div class="diff-col dark">
+        <div class="diff-header">insolvencia.ai</div>
+        <div class="diff-item"><span class="diff-icon">✓</span>Entrenada exclusivamente en TRLC, LC y jurisprudencia concursal española</div>
+        <div class="diff-item"><span class="diff-icon">✓</span>Clasifica, jerarquiza y contrasta la masa activa y pasiva</div>
+        <div class="diff-item"><span class="diff-icon">✓</span>Conoce cada plazo procesal del concurso de principio a fin</div>
+        <div class="diff-item"><span class="diff-icon">✓</span>Anticipa posiciones del AC, acreedores y juzgado de lo mercantil</div>
+        <div class="diff-item"><span class="diff-icon">✓</span>Jurisprudencia actualizada de los Juzgados de lo Mercantil</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="process-header">
+      <span class="section-label reveal">Metodología</span>
+      <h2 class="reveal">Así razona<br><em>insolvencia.ai</em></h2>
+      <p class="section-sub reveal">No empieza escribiendo. Empieza analizando el expediente como lo haría un concursalista con veinte años de experiencia.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01 / IDENTIFICA</div>
+        <h3>Tipo de procedimiento</h3>
+        <p>Concurso voluntario o necesario, ordinario o abreviado, concurso de persona natural, segunda oportunidad o reestructuración extrajudicial. Fase: común, convenio o liquidación.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02 / CLASIFICA</div>
+        <h3>Masa activa y pasiva</h3>
+        <p>Analiza el inventario de bienes y la lista de acreedores. Clasifica los créditos: contra la masa, con privilegio especial, con privilegio general, ordinarios y subordinados.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03 / CONTRASTA</div>
+        <h3>TRLC y jurisprudencia</h3>
+        <p>Confronta el caso con el Texto Refundido de la Ley Concursal, la jurisprudencia de los Juzgados de lo Mercantil y del Tribunal Supremo. Sin relleno, solo lo aplicable.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04 / DETECTA</div>
+        <h3>Riesgos y lagunas</h3>
+        <p>Identifica acciones de reintegración potenciales, calificación culpable, pasivos ocultos, créditos impugnables y plazos procesales críticos que podrían comprometer el procedimiento.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">05 / ANTICIPA</div>
+        <h3>Posición contraria</h3>
+        <p>Simula la posición de la administración concursal, los acreedores privilegiados y el juzgado. Anticipar objeciones antes de la vista evita sorpresas costosas.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">06 / REDACTA</div>
+        <h3>Solo cuando procede</h3>
+        <p>Una vez analizado el caso, propone estrategia y redacta: solicitud de concurso, informe de administración concursal, propuesta de convenio, solicitud de exoneración del pasivo insatisfecho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="funcionalidades">
+  <div class="container">
+    <span class="section-label reveal">Funcionalidades</span>
+    <h2 class="reveal">Todo lo que necesita<br>un <em>abogado concursalista</em></h2>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📄</div>
+        <h3>Análisis de documentos concursales</h3>
+        <p>Sube el balance, la lista de acreedores, el informe del AC o cualquier escrito del procedimiento. La IA lo analiza, lo contrasta y señala inconsistencias antes de que las vea el juzgado.</p>
+        <div class="feature-tags">
+          <span class="tag">Balance</span><span class="tag">Lista acreedores</span><span class="tag">Informe AC</span>
+        </div>
+      </div>
+      <div class="feature-card accent reveal">
+        <div class="feature-icon">⚖️</div>
+        <h3>Segunda oportunidad y EPI</h3>
+        <p>Desde la negociación extrajudicial con acreedores (AEP/PAAC) hasta la solicitud judicial de exoneración del pasivo insatisfecho. Toda la ruta, sin saltos de lógica.</p>
+        <div class="feature-tags">
+          <span class="tag">AEP</span><span class="tag">PAAC</span><span class="tag">Exoneración EPI</span>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🏛️</div>
+        <h3>Jurisprudencia concursal actualizada</h3>
+        <p>Base de datos de sentencias de Juzgados de lo Mercantil y Tribunal Supremo en materia concursal. Búsqueda semántica: encuentra precedentes relevantes para tu caso, no coincidencias de palabras.</p>
+        <div class="feature-tags">
+          <span class="tag">TS</span><span class="tag">AP</span><span class="tag">Mercantil</span>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📝</div>
+        <h3>Redacción de escritos concursales</h3>
+        <p>Solicitudes de concurso voluntario, propuestas de convenio, escritos de oposición, recursos de apelación e incidentes concursales. Con tu estrategia, no con plantillas genéricas.</p>
+        <div class="feature-tags">
+          <span class="tag">Solicitud</span><span class="tag">Convenio</span><span class="tag">Incidente</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASOS DE USO -->
+<section class="use-cases" id="casos">
+  <div class="container">
+    <span class="section-label reveal">Para quién</span>
+    <h2 class="reveal">Diseñado para quienes<br><em>viven del concurso</em></h2>
+    <p class="section-sub reveal">No para el abogado que ve un concurso al año. Para el que los gestiona cada semana y sabe la diferencia entre el art. 242 y el 242 bis.</p>
+    <div class="use-grid">
+      <div class="use-card reveal">
+        <div class="use-card-icon">👨‍⚖️</div>
+        <h3>Abogados concursalistas</h3>
+        <p>Potencia tu análisis sin perder el control del criterio. Para despachos individuales y socios con cartera de concursos activos.</p>
+      </div>
+      <div class="use-card reveal">
+        <div class="use-card-icon">🏢</div>
+        <h3>Administradores concursales</h3>
+        <p>Automatiza la clasificación de créditos, el análisis de la masa activa y la detección de acciones de reintegración potenciales.</p>
+      </div>
+      <div class="use-card reveal">
+        <div class="use-card-icon">🏦</div>
+        <h3>Equipos de reestructuración</h3>
+        <p>Para departamentos legales de bancos, fondos de deuda y asesores de deudores en negociaciones de reestructuración extrajudicial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="precios">
+  <div class="container">
+    <span class="section-label reveal" style="display:block;text-align:center">Precios</span>
+    <h2 class="reveal" style="text-align:center">Empieza gratis.<br><em>Paga cuando te convenza.</em></h2>
+    <p class="section-sub reveal" style="margin:0 auto 1rem;text-align:center">Sin tarjeta. Sin trucos. Si insolvencia.ai no te ahorra tiempo real en tu primer expediente, no tiene sentido que pagues.</p>
+
+    <!-- Freemium explainer strip -->
+    <div class="reveal" style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:3.5rem">
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--slate)">
+        <span style="color:var(--gold);font-weight:700">✓</span> Sin tarjeta de crédito
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--slate)">
+        <span style="color:var(--gold);font-weight:700">✓</span> Plan gratuito para siempre
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--slate)">
+        <span style="color:var(--gold);font-weight:700">✓</span> Cancela en cualquier momento
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--slate)">
+        <span style="color:var(--gold);font-weight:700">✓</span> 14 días de prueba Pro incluidos
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- PLAN GRATIS -->
+      <div class="plan reveal">
+        <div class="plan-name">Gratis</div>
+        <div class="plan-price"><sup>€</sup>0<sub style="font-family:var(--font-body);font-size:.9rem;font-weight:400;color:var(--muted)">/siempre</sub></div>
+        <p class="plan-desc">Para conocer la herramienta y hacer las primeras consultas sin compromiso.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><strong>10 consultas al mes</strong> — suficiente para probar el rigor</li>
+          <li>Chat con la IA concursal sin restricciones de tema</li>
+          <li>Búsqueda de jurisprudencia concursal básica</li>
+          <li>Análisis de documentos hasta <strong>3 páginas</strong></li>
+          <li>Acceso a las guías del TRLC</li>
+        </ul>
+        <!-- Locked features — visual friction -->
+        <div style="padding:.75rem 0;border-top:1px solid var(--border2);margin-top:.5rem">
+          <p style="font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem">Requiere plan Pro</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+            <li style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:#bbb">
+              <span style="font-size:.9rem">🔒</span> Subida de PDFs y análisis completo
+            </li>
+            <li style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:#bbb">
+              <span style="font-size:.9rem">🔒</span> Ruta completa Segunda Oportunidad
+            </li>
+            <li style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:#bbb">
+              <span style="font-size:.9rem">🔒</span> Clasificación automática de créditos
+            </li>
+            <li style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:#bbb">
+              <span style="font-size:.9rem">🔒</span> Historial de expedientes
+            </li>
+          </ul>
+        </div>
+        <a class="plan-btn outline" href="#" style="margin-top:1.25rem">Crear cuenta gratis</a>
+      </div>
+
+      <!-- PLAN PRO (featured) -->
+      <div class="plan featured reveal">
+        <div class="plan-badge">Más popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price"><sup>€</sup>89<sub>/mes</sub></div>
+        <p class="plan-desc">Para el concursalista activo. Todo desbloqueado, sin límites de uso.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><strong>Consultas ilimitadas</strong></li>
+          <li>Subida y análisis de PDFs sin límite de páginas</li>
+          <li>Ruta completa Segunda Oportunidad: AEP → concurso consecutivo → EPI</li>
+          <li>Clasificación automática de créditos concursales</li>
+          <li>Detección de acciones de reintegración potenciales</li>
+          <li>Jurisprudencia en tiempo real (Mercantil + TS)</li>
+          <li>Redacción de escritos concursales completos</li>
+          <li>Historial ilimitado de expedientes</li>
+          <li>Exportación en Word y PDF</li>
+        </ul>
+        <a class="plan-btn solid" href="#">Empieza — 14 días gratis</a>
+        <p style="text-align:center;font-size:.78rem;color:rgba(255,255,255,0.4);margin-top:.75rem">Sin tarjeta hasta que decidas quedarte</p>
+      </div>
+
+      <!-- PLAN DESPACHO -->
+      <div class="plan reveal">
+        <div class="plan-name">Despacho</div>
+        <div class="plan-price"><sup>€</sup>229<sub>/mes</sub></div>
+        <p class="plan-desc">Para equipos de varios concursalistas con expedientes compartidos.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Pro</li>
+          <li><strong>Hasta 5 usuarios</strong> incluidos (+€35/usuario adicional)</li>
+          <li>Expedientes compartidos entre el equipo</li>
+          <li>Roles y permisos por usuario</li>
+          <li>Panel de administración del despacho</li>
+          <li>Soporte prioritario (respuesta en &lt;4h)</li>
+          <li>Onboarding personalizado con el equipo</li>
+          <li>Factura mensual con desglose</li>
+        </ul>
+        <a class="plan-btn outline" href="/cdn-cgi/l/email-protection#6a0205060b2a03041905061c0f0409030b440b03">Hablar con el equipo</a>
+        <p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:.75rem">También disponible facturación anual (2 meses gratis)</p>
+      </div>
+
+    </div>
+
+    <!-- Comparison note -->
+    <div class="reveal" style="margin-top:3rem;padding:1.5rem 2rem;background:var(--cream);border-radius:10px;border:1px solid var(--border2);text-align:center">
+      <p style="font-size:.9rem;color:var(--slate)">
+        <strong>¿Tienes dudas entre el plan Gratis y el Pro?</strong><br>
+        <span style="color:var(--muted)">El plan Pro se activa con 14 días de prueba gratuita, sin tarjeta. Si en esos 14 días no has resuelto al menos 3 expedientes más rápido, cancelas sin coste.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURIDAD -->
+<section class="security-section" id="seguridad">
+  <div class="container">
+    <span class="section-label reveal">Seguridad</span>
+    <h2 class="reveal">Confidencialidad profesional,<br><em>por diseño</em></h2>
+    <p class="section-sub reveal">En insolvencia.ai tratamos la privacidad como una obligación deontológica, no como un claim de marketing.</p>
+    <div class="security-grid">
+      <div class="sec-item reveal">
+        <div class="sec-icon">🇪🇺</div>
+        <div>
+          <h4>Infraestructura 100% segura</h4>
+          <p>Tus datos se transmiten siempre con cifrado end-to-end. Acceso restringido, auditable y protegido bajo los estándares más exigentes del sector.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-icon">🔐</div>
+        <div>
+          <h4>Tus documentos no entrenan el modelo</h4>
+          <p>Los expedientes que subes son tuyos y solo tuyos. Nunca se usan para reentrenar el sistema ni se comparten con terceros.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-icon">📋</div>
+        <div>
+          <h4>RGPD, LOPDGDD y DPA vigente</h4>
+          <p>Cumplimiento íntegro del RGPD y la LOPDGDD. El procesamiento de datos está cubierto por el Data Processing Agreement (DPA) de Anthropic, que incluye las Cláusulas Contractuales Estándar de la UE (SCCs) para transferencias internacionales.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-icon">🤝</div>
+        <div>
+          <h4>Sin accesos indebidos</h4>
+          <p>Ningún empleado de insolvencia.ai tiene acceso a tus expedientes o conversaciones. Tu secreto profesional está intacto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <span class="section-label reveal" style="display:block;text-align:center">Preguntas frecuentes</span>
+    <h2 class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0">Lo que nos preguntan<br><em>los concursalistas</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Es insolvencia.ai un sustituto del abogado?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No, y nunca lo será. Insolvencia.ai es un copiloto que amplifica tu criterio, no que lo reemplaza. Detecta lo que puede fallar, contrasta con la norma y la jurisprudencia, y propone. Pero la decisión estratégica y la responsabilidad profesional son siempre tuyas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Está actualizado con el TRLC vigente?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Sí. El sistema está actualizado con el Texto Refundido de la Ley Concursal (Real Decreto Legislativo 1/2020) y sus modificaciones posteriores, incluyendo las reformas introducidas por la Ley 16/2022 de reestructuración e insolvencia.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa con mis documentos y expedientes?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Tus documentos se procesan de forma efímera y no se almacenan permanentemente. No se usan para entrenar ningún modelo. La infraestructura está alojada en la UE y cumple íntegramente con el RGPD y el secreto profesional del abogado.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo usarlo para segunda oportunidad de personas físicas?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Sí. Insolvencia.ai cubre todo el procedimiento de segunda oportunidad: desde la negociación extrajudicial de pagos (AEP o PAAC), pasando por el concurso consecutivo, hasta la solicitud de exoneración del pasivo insatisfecho (EPI) tanto ordinaria como especial.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Hay período de prueba gratuito?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Sí. El plan Starter es gratuito e incluye 20 consultas mensuales sin límite de tiempo. El plan Profesional incluye 14 días de prueba gratuita sin necesidad de tarjeta de crédito.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Empieza a trabajar con<br><em>criterio concursal real.</em></h2>
+      <p>Únete a los abogados concursalistas que ya usan insolvencia.ai para analizar más, errar menos y ganar tiempo en cada expediente.</p>
+      <div class="cta-actions">
+        <a class="btn-cta-gold" href="#">Accede gratis — sin tarjeta</a>
+        <a class="btn-cta-ghost" href="/cdn-cgi/l/email-protection#70181f1c1130191e031f1c06151e1319115e1119">Hablar con el equipo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#">insolvencia<span style="color:var(--gold)">.ai</span></a>
+        <p>IA especializada en derecho concursal. Para abogados que viven del concurso y necesitan precisión, no generalidades.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Producto</h5>
+        <ul>
+          <li><a href="#">Cómo funciona</a></li>
+          <li><a href="#">Funcionalidades</a></li>
+          <li><a href="#">Precios</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="#">Términos</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 insolvencia.ai — Todos los derechos reservados</span>
+      <div class="footer-flags">
+        <span>Empresa española 🇪🇸</span>
+        <span style="margin:0 .5rem">·</span>
+        <span>Infraestructura europea 🇪🇺</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// MOBILE MENU
+function toggleMobile() {
+  document.getElementById('nav').classList.toggle('mobile-open');
+}
+
+// FAQ
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
+
+// REVEAL ON SCROLL
+const reveals = document.querySelectorAll('.reveal');
+
+// Show all immediately as fallback, then animate
+const showAll = () => reveals.forEach(el => el.classList.add('visible'));
+
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 55);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => io.observe(el));
+  // Safety net: after 2s reveal anything still hidden
+  setTimeout(() => reveals.forEach(el => el.classList.add('visible')), 2000);
+} else {
+  showAll();
+}
+</script>
+</body>
+</html>
