@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies — insolvencia.ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0D0D12;--ink2:#1A1A2E;--ivory:#F8F6F1;--cream:#F1EDE4;--gold:#B8962E;--gold-l:#D4AF5A;--gold-d:#8C7022;--slate:#3D4A5C;--muted:#6B7385;--border:rgba(184,150,46,0.18);--border2:rgba(13,13,18,0.08);--white:#FFFFFF;--font-display:'Cormorant Garamond',Georgia,serif;--font-body:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--ivory);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(248,246,241,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:all .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(13,13,18,0.08)}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--slate);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:.75rem;align-items:center}
+.btn-ghost{padding:.5rem 1.1rem;font-size:.875rem;font-weight:500;color:var(--ink);background:none;border:1px solid var(--border2);border-radius:6px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-primary{padding:.5rem 1.25rem;font-size:.875rem;font-weight:600;color:var(--ivory);background:var(--ink);border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-primary:hover{background:var(--ink2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink)}
+.page-hero{padding:120px 5% 60px;background:var(--cream);border-bottom:1px solid var(--border2)}
+.breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+.breadcrumb a{color:var(--gold-d);text-decoration:none}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-0.02em;color:var(--ink);margin-bottom:.5rem}
+.meta{font-size:.85rem;color:var(--muted)}
+.legal-body{max-width:780px;margin:0 auto;padding:60px 5% 100px}
+.legal-body h2{font-family:var(--font-display);font-size:1.6rem;font-weight:600;color:var(--ink);margin:2.5rem 0 .75rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold-d)}
+.legal-body h3{font-size:1.05rem;font-weight:600;color:var(--gold-d);margin:1.75rem 0 .5rem}
+.legal-body p{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.legal-body ul{margin:.5rem 0 1rem 1.5rem}
+.legal-body li{font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:.35rem}
+.info-box{background:var(--cream);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:1.25rem 1.5rem;margin-bottom:2.5rem}
+.info-box p{margin:0;font-size:.9rem;color:var(--slate);line-height:1.7}
+.table-wrap{overflow-x:auto;margin:1rem 0 1.5rem}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead tr{background:var(--ink);color:#fff}
+thead th{padding:.7rem 1rem;text-align:left;font-weight:600}
+tbody tr:nth-child(even){background:var(--cream)}
+tbody tr:nth-child(odd){background:var(--white)}
+tbody td{padding:.65rem 1rem;color:var(--muted);border-bottom:1px solid var(--border2)}
+.cookie-type{display:inline-block;padding:.2rem .6rem;border-radius:100px;font-size:.75rem;font-weight:600}
+.cookie-type.tecnica{background:#ECFDF5;color:#065F46}
+.cookie-type.analitica{background:#EEF2FF;color:#3730A3}
+.cookie-type.pago{background:#FFF7ED;color:#92400E}
+
+/* Cookie banner preview */
+.banner-preview{background:var(--ink);border-radius:12px;padding:1.5rem 2rem;margin:1.5rem 0;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.banner-preview p{font-size:.85rem;color:rgba(255,255,255,0.7);margin:0;flex:1;min-width:200px}
+.banner-preview p a{color:var(--gold-l)}
+.banner-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.banner-btns button{padding:.45rem 1rem;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-accept{background:var(--gold);color:var(--ink)}
+.btn-reject{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+.btn-config{background:none;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2) !important}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:60px 5% 30px;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem}
+.footer-col h5{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:1.25rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.footer-col a{font-size:.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s}
+.footer-col a:hover{color:var(--gold-l)}
+.footer-bottom{padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:1rem}
+.footer-brand p{margin-top:1rem;font-size:.85rem;line-height:1.7;color:rgba(255,255,255,0.4);max-width:280px}
+@media(max-width:640px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.banner-preview{flex-direction:column}}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">insolvencia<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+    <li><a href="index.html#funcionalidades">Funcionalidades</a></li>
+    <li><a href="index.html#precios">Precios</a></li>
+    <li><a href="index.html#seguridad">Seguridad</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="btn-ghost" href="index.html#precios">Iniciar sesión</a>
+    <a class="btn-primary" href="index.html#precios">Accede gratis</a>
+  </div>
+  <div class="hamburger" onclick="this.closest('nav').classList.toggle('mobile-open')"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="legal-body" style="padding:0">
+    <p class="breadcrumb"><a href="index.html">Inicio</a> → Política de Cookies</p>
+    <h1>Política de Cookies</h1>
+    <p class="meta">Última actualización: Marzo 2025 · ORTEGA HILLS CAPITAL S.L.</p>
+  </div>
+</div>
+
+<div class="legal-body">
+
+  <div class="info-box">
+    <p>Este sitio web utiliza cookies propias y de terceros. Puedes aceptar, rechazar o configurar su uso en el banner que aparece al acceder por primera vez.<br>
+    <strong>Contacto:</strong> info@ortegaygarcia.com</p>
+  </div>
+
+  <h2>1. ¿Qué son las cookies?</h2>
+  <p>Las cookies son pequeños archivos de texto que se almacenan en el dispositivo del usuario al visitar un sitio web. Permiten recordar información sobre la visita para mejorar la experiencia de navegación y el funcionamiento del servicio.</p>
+
+  <h2>2. Cookies que utilizamos</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cookie</th><th>Tipo</th><th>Duración</th><th>Finalidad</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>session_id</code></td>
+          <td><span class="cookie-type tecnica">Técnica</span></td>
+          <td>Sesión</td>
+          <td>Mantener la sesión del usuario autenticado</td>
+        </tr>
+        <tr>
+          <td><code>csrf_token</code></td>
+          <td><span class="cookie-type tecnica">Técnica</span></td>
+          <td>Sesión</td>
+          <td>Protección contra ataques CSRF</td>
+        </tr>
+        <tr>
+          <td><code>cookie_consent</code></td>
+          <td><span class="cookie-type tecnica">Técnica</span></td>
+          <td>12 meses</td>
+          <td>Recordar las preferencias de cookies del usuario</td>
+        </tr>
+        <tr>
+          <td><code>_ga</code></td>
+          <td><span class="cookie-type analitica">Analítica</span></td>
+          <td>2 años</td>
+          <td>Análisis de tráfico y comportamiento de navegación (Google Analytics)</td>
+        </tr>
+        <tr>
+          <td><code>_ga_*</code></td>
+          <td><span class="cookie-type analitica">Analítica</span></td>
+          <td>2 años</td>
+          <td>Identificador de sesión de Google Analytics</td>
+        </tr>
+        <tr>
+          <td><code>stripe_sid</code></td>
+          <td><span class="cookie-type pago">Pago</span></td>
+          <td>Sesión</td>
+          <td>Gestión del proceso de pago seguro (Stripe)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>3. Cookies técnicas — sin consentimiento</h2>
+  <p>Las cookies técnicas son estrictamente necesarias para el funcionamiento del sitio web. Conforme al artículo 22.2 de la LSSICE, <strong>no requieren consentimiento previo</strong>. Las cookies <code>session_id</code>, <code>csrf_token</code> y <code>stripe_sid</code> tienen esta consideración y no pueden desactivarse sin afectar al funcionamiento del servicio.</p>
+
+  <h2>4. Cookies analíticas — requieren consentimiento</h2>
+  <p>Las cookies de Google Analytics (<code>_ga</code> y <code>_ga_*</code>) recopilan información estadística de forma anónima y agregada. Su finalidad es mejorar el servicio, no identificar usuarios individualmente. <strong>Solo se instalan si el usuario ha prestado su consentimiento expreso</strong> a través del banner de cookies.</p>
+
+  <h2>5. Así es el banner de consentimiento</h2>
+  <p>Al acceder por primera vez al sitio web, verás este banner:</p>
+
+  <div class="banner-preview">
+    <p>Usamos cookies propias y de terceros para analizar el uso del sitio y mejorar el servicio. Puedes aceptar todas, rechazarlas o configurarlas. <a href="#">Más información</a></p>
+    <div class="banner-btns">
+      <button class="btn-accept">Aceptar todas</button>
+      <button class="btn-reject">Rechazar</button>
+      <button class="btn-config">Configurar</button>
+    </div>
+  </div>
+
+  <p>Tu preferencia queda guardada durante <strong>12 meses</strong>. Puedes cambiarla en cualquier momento desde el enlace "Gestionar cookies" del footer.</p>
+
+  <h2>6. Cómo gestionar las cookies desde tu navegador</h2>
+  <ul>
+    <li><strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies y otros datos de sitios</li>
+    <li><strong>Firefox:</strong> Opciones → Privacidad y seguridad → Cookies y datos del sitio</li>
+    <li><strong>Safari:</strong> Preferencias → Privacidad → Gestionar datos de sitios web</li>
+    <li><strong>Edge:</strong> Configuración → Privacidad, búsqueda y servicios → Cookies</li>
+  </ul>
+  <p>Ten en cuenta que deshabilitar cookies técnicas puede impedir el correcto funcionamiento del servicio.</p>
+
+  <h3>Opt-out de Google Analytics</h3>
+  <p>Puedes desactivar Google Analytics instalando el complemento oficial: <strong>https://tools.google.com/dlpage/gaoptout</strong></p>
+
+  <h2>7. Transferencias internacionales</h2>
+  <p>Las cookies de Google Analytics implican una transferencia de datos a Google LLC (EE.UU.), acogida al marco <strong>EU-US Data Privacy Framework</strong> y con Cláusulas Contractuales Estándar vigentes.</p>
+
+  <h2>8. Actualizaciones</h2>
+  <p>Esta política puede actualizarse para reflejar cambios en las cookies utilizadas o en la normativa. La versión vigente estará siempre disponible en <strong>https://www.insolvencia.ai/cookies</strong>. Última actualización: Marzo 2025.</p>
+
+  <h2>9. Contacto</h2>
+  <p>Para cualquier consulta sobre el uso de cookies: <strong>info@ortegaygarcia.com</strong></p>
+
+</div>
+
+<footer>
+  <div style="max-width:1160px;margin:0 auto;padding:0 5%">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:700;color:#F8F6F1;text-decoration:none">insolvencia<span style="color:#D4AF5A">.ai</span></a>
+        <p>IA especializada en derecho concursal. Para abogados que viven del concurso y necesitan precisión, no generalidades.</p>
+      </div>
+      <div class="footer-col"><h5>Producto</h5><ul>
+        <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+        <li><a href="index.html#funcionalidades">Funcionalidades</a></li>
+        <li><a href="index.html#precios">Precios</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Empresa</h5><ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li><a href="mailto:info@ortegaygarcia.com">Contacto</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="aviso-legal.html">Aviso legal</a></li>
+        <li><a href="privacidad.html">Privacidad</a></li>
+        <li><a href="cookies.html">Cookies</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 insolvencia.ai — ORTEGA HILLS CAPITAL S.L. · B98883655</span>
+      <span>Empresa española 🇪🇸</span>
+    </div>
+  </div>
+</footer>
+<script>window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));</script>
+</body>
+</html>

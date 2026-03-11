@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviso Legal — insolvencia.ai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0D0D12; --ink2:#1A1A2E; --ivory:#F8F6F1; --cream:#F1EDE4;
+  --gold:#B8962E; --gold-l:#D4AF5A; --gold-d:#8C7022;
+  --slate:#3D4A5C; --muted:#6B7385; --border:rgba(184,150,46,0.18);
+  --border2:rgba(13,13,18,0.08); --white:#FFFFFF;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--ivory);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(248,246,241,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:all .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(13,13,18,0.08)}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--slate);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;gap:.75rem;align-items:center}
+.btn-ghost{padding:.5rem 1.1rem;font-size:.875rem;font-weight:500;color:var(--ink);background:none;border:1px solid var(--border2);border-radius:6px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-ghost:hover{background:var(--cream)}
+.btn-primary{padding:.5rem 1.25rem;font-size:.875rem;font-weight:600;color:var(--ivory);background:var(--ink);border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-primary:hover{background:var(--ink2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink)}
+
+/* PAGE HERO */
+.page-hero{padding:120px 5% 60px;background:var(--cream);border-bottom:1px solid var(--border2)}
+.page-hero .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+.page-hero .breadcrumb a{color:var(--gold-d);text-decoration:none}
+.page-hero .breadcrumb a:hover{text-decoration:underline}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-0.02em;color:var(--ink);margin-bottom:.5rem}
+.page-hero .meta{font-size:.85rem;color:var(--muted)}
+
+/* CONTENT */
+.legal-body{max-width:780px;margin:0 auto;padding:60px 5% 100px}
+.legal-body h2{font-family:var(--font-display);font-size:1.6rem;font-weight:600;color:var(--ink);margin:2.5rem 0 .75rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold-d)}
+.legal-body h3{font-size:1.05rem;font-weight:600;color:var(--gold-d);margin:1.75rem 0 .5rem}
+.legal-body p{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.legal-body ul{margin:.5rem 0 1rem 1.5rem}
+.legal-body li{font-size:.95rem;color:var(--muted);line-height:1.75;margin-bottom:.35rem}
+.info-box{background:var(--cream);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:1.25rem 1.5rem;margin-bottom:2.5rem}
+.info-box p{margin:0;font-size:.9rem;color:var(--slate);line-height:1.7}
+.info-box strong{color:var(--ink)}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:60px 5% 30px;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem}
+.footer-brand p{margin-top:1rem;font-size:.85rem;line-height:1.7;color:rgba(255,255,255,0.4);max-width:280px}
+.footer-col h5{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:1.25rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.footer-col a{font-size:.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s}
+.footer-col a:hover{color:var(--gold-l)}
+.footer-bottom{padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:1rem}
+
+@media(max-width:640px){.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">insolvencia<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+    <li><a href="index.html#funcionalidades">Funcionalidades</a></li>
+    <li><a href="index.html#precios">Precios</a></li>
+    <li><a href="index.html#seguridad">Seguridad</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="btn-ghost" href="index.html#precios">Iniciar sesión</a>
+    <a class="btn-primary" href="index.html#precios">Accede gratis</a>
+  </div>
+  <div class="hamburger" onclick="this.closest('nav').classList.toggle('mobile-open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="legal-body" style="padding:0">
+    <p class="breadcrumb"><a href="index.html">Inicio</a> → Aviso Legal</p>
+    <h1>Aviso Legal</h1>
+    <p class="meta">Última actualización: Marzo 2025 · ORTEGA HILLS CAPITAL S.L.</p>
+  </div>
+</div>
+
+<div class="legal-body">
+
+  <div class="info-box">
+    <p><strong>Titular:</strong> ORTEGA HILLS CAPITAL S.L. · <strong>NIF:</strong> B98883655<br>
+    <strong>Domicilio:</strong> Calle Colón, 22, 5ºB, Valencia (España)<br>
+    <strong>Email:</strong> info@ortegaygarcia.com · <strong>Web:</strong> https://www.insolvencia.ai</p>
+  </div>
+
+  <h2>1. Datos identificativos del titular</h2>
+  <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSICE), se informa que el titular del sitio web https://www.insolvencia.ai es:</p>
+  <ul>
+    <li><strong>Razón social:</strong> ORTEGA HILLS CAPITAL S.L.</li>
+    <li><strong>NIF:</strong> B98883655</li>
+    <li><strong>Domicilio social:</strong> Calle Colón, 22, 5ºB, Valencia (España)</li>
+    <li><strong>Correo electrónico:</strong> info@ortegaygarcia.com</li>
+    <li><strong>Actividad:</strong> Prestación de servicios de inteligencia artificial aplicada al derecho concursal.</li>
+  </ul>
+
+  <h2>2. Objeto y ámbito de aplicación</h2>
+  <p>El presente Aviso Legal regula el acceso, navegación y uso del sitio web https://www.insolvencia.ai (en adelante, "el Sitio Web"), del que es titular ORTEGA HILLS CAPITAL S.L.</p>
+  <p>El acceso al Sitio Web implica la aceptación plena y sin reservas de las presentes condiciones. El titular se reserva el derecho a modificar el presente Aviso Legal en cualquier momento, siendo responsabilidad del usuario consultarlo periódicamente.</p>
+
+  <h2>3. Propiedad intelectual e industrial</h2>
+  <p>Todos los contenidos del Sitio Web —incluyendo, sin carácter limitativo, textos, imágenes, diseños, logotipos, iconos, código fuente, software y bases de datos— son propiedad de ORTEGA HILLS CAPITAL S.L. o de terceros que han autorizado su uso, y están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial.</p>
+  <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública o transformación de dichos contenidos sin autorización expresa y por escrito del titular, salvo para uso personal y privado no comercial.</p>
+
+  <h2>4. Exclusión de responsabilidad</h2>
+  <h3>4.1 Disponibilidad del servicio</h3>
+  <p>ORTEGA HILLS CAPITAL S.L. no garantiza la disponibilidad continua e ininterrumpida del Sitio Web, y queda exonerada de cualquier responsabilidad por daños o perjuicios derivados de interrupciones, errores técnicos o indisponibilidades del servicio.</p>
+
+  <h3>4.2 Contenido generado por IA</h3>
+  <p>Los textos, análisis y respuestas generados por el sistema de inteligencia artificial de insolvencia.ai tienen carácter meramente informativo y auxiliar. No constituyen asesoramiento jurídico, ni sustituyen en ningún caso el criterio profesional del abogado o administrador concursal responsable del expediente.</p>
+  <p>ORTEGA HILLS CAPITAL S.L. no asume responsabilidad alguna por las decisiones adoptadas por los usuarios basándose en los resultados del sistema, ni por errores, omisiones o inexactitudes en los contenidos generados.</p>
+
+  <h3>4.3 Enlaces a terceros</h3>
+  <p>El Sitio Web puede contener enlaces a sitios web de terceros. El titular no asume responsabilidad alguna sobre los contenidos, funcionamiento o política de privacidad de dichos sitios.</p>
+
+  <h2>5. Ley aplicable y jurisdicción</h2>
+  <p>El presente Aviso Legal se rige por la legislación española vigente. Para la resolución de cualquier controversia derivada del acceso o uso del Sitio Web, las partes se someten, con renuncia expresa a cualquier otro fuero, a los Juzgados y Tribunales de Valencia (España).</p>
+
+  <h2>6. Contacto</h2>
+  <p>Para cualquier consulta relacionada con el presente Aviso Legal, puede dirigirse a: <strong>info@ortegaygarcia.com</strong></p>
+
+</div>
+
+<footer>
+  <div style="max-width:1160px;margin:0 auto;padding:0 5%">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="color:#F8F6F1;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:700;text-decoration:none">insolvencia<span style="color:#D4AF5A">.ai</span></a>
+        <p>IA especializada en derecho concursal. Para abogados que viven del concurso y necesitan precisión, no generalidades.</p>
+      </div>
+      <div class="footer-col"><h5>Producto</h5><ul>
+        <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+        <li><a href="index.html#funcionalidades">Funcionalidades</a></li>
+        <li><a href="index.html#precios">Precios</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Empresa</h5><ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li><a href="mailto:info@ortegaygarcia.com">Contacto</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="aviso-legal.html">Aviso legal</a></li>
+        <li><a href="privacidad.html">Privacidad</a></li>
+        <li><a href="cookies.html">Cookies</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 insolvencia.ai — ORTEGA HILLS CAPITAL S.L. · B98883655</span>
+      <span>Empresa española 🇪🇸</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
+</script>
+</body>
+</html>
