@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARIA — Copiloto Concursal · insolvencia.ai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_ZnVuLXNlYXNuYWlsLTUzLmNsZXJrLmFjY291bnRzLmRldiQ"
+    src="https://fun-seasnail-53.clerk.accounts.dev/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0D0D12; --ivory: #F8F6F1; --gold: #B8962E;
+      --gold-light: #D4AF5A; --text: #3D4A5C; --muted: #8A95A3;
+      --border: rgba(13,13,18,0.08);
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--ivory); color: var(--text); height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+
+    #auth-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100dvh; padding: 2rem; }
+    .auth-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .auth-logo span { color: var(--gold); }
+    .auth-subtitle { font-size: 0.9rem; color: var(--muted); margin-bottom: 2.5rem; text-align: center; }
+    #clerk-sign-in { width: 100%; max-width: 400px; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 64px; background: rgba(248,246,241,0.97); border-bottom: 1px solid var(--border); backdrop-filter: blur(14px); flex-shrink: 0; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--muted); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #10B981; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .counter-badge { font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.75rem; border-radius: 100px; background: rgba(184,150,46,0.12); color: var(--gold); border: 1px solid rgba(184,150,46,0.25); }
+    .counter-badge.low { background: rgba(239,68,68,0.1); color: #DC2626; border-color: rgba(239,68,68,0.25); }
+    .btn-signout { font-size: 0.8rem; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.75rem; cursor: pointer; transition: all 0.2s; }
+    .btn-signout:hover { color: var(--ink); }
+
+    #messages { flex: 1; overflow-y: auto; padding: 2rem 5%; display: flex; flex-direction: column; gap: 1.5rem; }
+    .msg { display: flex; gap: 0.75rem; max-width: 820px; width: 100%; margin: 0 auto; }
+    .msg.user { flex-direction: row-reverse; }
+    .avatar { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 700; }
+    .avatar.aria { background: var(--ink); color: var(--gold-light); }
+    .avatar.user-av { background: #E5E7EB; color: var(--muted); }
+    .bubble { max-width: 76%; padding: 0.85rem 1.1rem; border-radius: 16px; font-size: 0.9rem; line-height: 1.75; }
+    .bubble.aria { background: #fff; border: 1px solid var(--border); border-radius: 4px 16px 16px 16px; color: var(--text); white-space: pre-wrap; }
+    .bubble.user { background: var(--ink); color: var(--ivory); border-radius: 16px 4px 16px 16px; }
+
+    #limit-wall { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; text-align: center; max-width: 480px; margin: 0 auto; }
+    #limit-wall h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 0.75rem; }
+    #limit-wall p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    .btn-upgrade { padding: 0.85rem 2rem; background: var(--ink); color: var(--gold-light); border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+
+    #suggestions { padding: 0 5% 1rem; max-width: 820px; margin: 0 auto; width: 100%; }
+    #suggestions p { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .suggestions-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .suggestion-btn { font-size: 0.78rem; padding: 0.4rem 0.85rem; background: #fff; border: 1px solid var(--border); border-radius: 8px; color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .suggestion-btn:hover { border-color: var(--gold); }
+
+    .typing-bubble { background: #fff; border: 1px solid var(--border); border-radius: 4px 16px 16px 16px; padding: 0.85rem 1.1rem; display: flex; gap: 6px; align-items: center; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: bounce 1.2s ease-in-out infinite; }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+    #input-area { padding: 1rem 5%; border-top: 1px solid var(--border); background: rgba(248,246,241,0.97); backdrop-filter: blur(14px); flex-shrink: 0; }
+    .input-inner { max-width: 820px; margin: 0 auto; display: flex; gap: 0.75rem; align-items: flex-end; }
+    #input-wrap { flex: 1; background: #fff; border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.2s; }
+    #input-wrap:focus-within { border-color: var(--gold); }
+    #chat-input { width: 100%; background: transparent; border: none; outline: none; padding: 0.85rem 1rem; font-size: 0.9rem; font-family: 'DM Sans', sans-serif; color: var(--ink); resize: none; max-height: 120px; line-height: 1.6; }
+    #send-btn { width: 44px; height: 44px; background: var(--ink); border: none; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+    #send-btn:disabled { background: #E5E7EB; cursor: not-allowed; }
+    .disclaimer { text-align: center; font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
+
+    #chat-screen { display: none; flex-direction: column; height: 100dvh; }
+  </style>
+</head>
+<body>
+
+  <div id="auth-screen">
+    <div class="auth-logo">insolvencia<span>.ai</span></div>
+    <p class="auth-subtitle">Accede para usar ARIA, tu copiloto de derecho concursal</p>
+    <div id="clerk-sign-in"></div>
+  </div>
+
+  <div id="chat-screen">
+    <nav>
+      <a href="/" class="nav-brand">insolvencia<span>.ai</span></a>
+      <div class="nav-right">
+        <div class="nav-status"><div class="status-dot"></div> ARIA en línea</div>
+        <div class="counter-badge" id="counter-badge">10 consultas</div>
+        <button class="btn-signout" id="signout-btn">Salir</button>
+      </div>
+    </nav>
+
+    <div id="messages"></div>
+
+    <div id="limit-wall">
+      <h3>Has usado tus 10 consultas gratuitas</h3>
+      <p>El plan gratuito incluye 10 consultas al mes. Para seguir usando ARIA sin límites, activa el plan Pro.</p>
+      <a class="btn-upgrade" href="/#precios">Ver plan Pro — €89/mes</a>
+    </div>
+
+    <div id="suggestions">
+      <p>Consultas frecuentes:</p>
+      <div class="suggestions-list">
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">¿Cómo se clasifica un crédito hipotecario en el concurso?</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">¿Cuáles son los plazos para solicitar la exoneración EPI?</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">¿Qué requisitos exige el TRLC para el concurso consecutivo?</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">¿Cuándo procede la calificación culpable del concurso?</button>
+      </div>
+    </div>
+
+    <div id="input-area">
+      <div class="input-inner">
+        <div id="input-wrap">
+          <textarea id="chat-input" rows="1" placeholder="Escribe tu consulta concursal... (Enter para enviar)"></textarea>
+        </div>
+        <button id="send-btn" disabled onclick="sendMessage()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#D4AF5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+      <p class="disclaimer">ARIA es un copiloto jurídico. No sustituye el criterio profesional del abogado.</p>
+    </div>
+  </div>
+
+  <script>
+    const MAX_QUERIES = 10;
+    const messagesEl = document.getElementById('messages');
+    const inputEl = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const suggestionsEl = document.getElementById('suggestions');
+    const limitWall = document.getElementById('limit-wall');
+    const inputArea = document.getElementById('input-area');
+    const counterBadge = document.getElementById('counter-badge');
+
+    let history = [], isLoading = false, queryCount = 0, userId = null;
+
+    function getStorageKey(uid) { return `aria_q_${uid}_${new Date().getMonth()}_${new Date().getFullYear()}`; }
+    function loadQueryCount(uid) { const s = localStorage.getItem(getStorageKey(uid)); return s ? parseInt(s) : 0; }
+    function saveQueryCount(uid, n) { localStorage.setItem(getStorageKey(uid), n.toString()); }
+
+    function updateCounter() {
+      const r = MAX_QUERIES - queryCount;
+      counterBadge.textContent = `${r} consulta${r !== 1 ? 's' : ''} restante${r !== 1 ? 's' : ''}`;
+      counterBadge.className = 'counter-badge' + (r <= 3 ? ' low' : '');
+    }
+
+    function checkLimit() {
+      if (queryCount >= MAX_QUERIES) {
+        inputArea.style.display = 'none';
+        suggestionsEl.style.display = 'none';
+        limitWall.style.display = 'flex';
+        return true;
+      }
+      return false;
+    }
+
+    function addMessage(role, content) {
+      const msg = document.createElement('div');
+      msg.className = `msg ${role}`;
+      const av = document.createElement('div');
+      av.className = `avatar ${role === 'assistant' ? 'aria' : 'user-av'}`;
+      av.textContent = role === 'assistant' ? 'AR' : 'TÚ';
+      const bub = document.createElement('div');
+      bub.className = `bubble ${role === 'assistant' ? 'aria' : 'user'}`;
+      bub.textContent = content.replace(/\*\*(.*?)\*\*/g, '$1');
+      msg.appendChild(av); msg.appendChild(bub);
+      messagesEl.appendChild(msg);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addTyping() {
+      const msg = document.createElement('div'); msg.className = 'msg'; msg.id = 'typing';
+      const av = document.createElement('div'); av.className = 'avatar aria'; av.textContent = 'AR';
+      const bub = document.createElement('div'); bub.className = 'typing-bubble';
+      bub.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+      msg.appendChild(av); msg.appendChild(bub);
+      messagesEl.appendChild(msg); messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+    async function sendMessage(text) {
+      const content = text || inputEl.value.trim();
+      if (!content || isLoading || checkLimit()) return;
+      suggestionsEl.style.display = 'none';
+      inputEl.value = ''; inputEl.style.height = 'auto';
+      sendBtn.disabled = true; isLoading = true;
+      history.push({ role: 'user', content });
+      addMessage('user', content); addTyping();
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        });
+        const data = await res.json(); removeTyping();
+        if (!res.ok) throw new Error(data.error);
+        history.push({ role: 'assistant', content: data.message });
+        addMessage('assistant', data.message);
+        queryCount++; saveQueryCount(userId, queryCount);
+        updateCounter(); checkLimit();
+      } catch {
+        removeTyping(); addMessage('assistant', 'Error al conectar. Inténtalo de nuevo.');
+      } finally {
+        isLoading = false; if (queryCount < MAX_QUERIES) inputEl.focus();
+      }
+    }
+
+    function sendSuggestion(btn) { sendMessage(btn.textContent); }
+
+    inputEl.addEventListener('input', () => {
+      sendBtn.disabled = !inputEl.value.trim();
+      inputEl.style.height = 'auto';
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+    });
+    inputEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+
+    window.addEventListener('load', async () => {
+      await window.Clerk.load();
+      if (window.Clerk.user) {
+        showChat(window.Clerk.user);
+      } else {
+        document.getElementById('auth-screen').style.display = 'flex';
+        window.Clerk.mountSignIn(document.getElementById('clerk-sign-in'));
+        window.Clerk.addListener(({ user }) => { if (user) showChat(user); });
+      }
+    });
+
+    function showChat(user) {
+      userId = user.id;
+      queryCount = loadQueryCount(userId);
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('chat-screen').style.display = 'flex';
+      updateCounter(); checkLimit();
+      if (queryCount < MAX_QUERIES) {
+        addMessage('assistant', 'Hola, soy ARIA, tu copiloto de derecho concursal.\n\nEstoy especializada en el Texto Refundido de la Ley Concursal (TRLC) y la jurisprudencia de los Juzgados de lo Mercantil y el Tribunal Supremo.\n\n¿Sobre qué expediente o cuestión concursal trabajamos hoy?');
+      }
+      document.getElementById('signout-btn').addEventListener('click', async () => {
+        await window.Clerk.signOut(); location.reload();
+      });
+    }
+  </script>
+</body>
+</html>
