@@ -53,7 +53,7 @@ async function invokeModel(system, messages, maxTokens = 1500) {
   };
 
   const command = new InvokeModelCommand({
-    modelId: "anthropic.claude-sonnet-4-5",
+    modelId: "anthropic.claude-sonnet-4-5-20251001",
     contentType: "application/json",
     accept: "application/json",
     body: JSON.stringify(payload),
